@@ -1,0 +1,78 @@
+    {% extends 'base.html.twig' %}
+
+    {% block title %}Tache index
+    {% endblock %}
+
+    {% block body %}
+        <section class="curved container-fluid d-flex justify-content-center align-items-center">
+            <img src="{{ asset('assets/img/osceale-logo.png') }}" alt="">
+        </section>
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-12 d-flex flex-column align-items-center ">
+                    <h1 class="mt4">S'organiser</h1>
+                    <p style='font-size:15px;text-align:center'>
+                        Pour faciliter votre travail ou vos activités, OSCEALE met à votre
+                        <br>
+                        disposition une “TO DO LIST”.
+                        <br>
+                        Pour les étudiants, vous pouvez l’utiliser pour vos devoirs !
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container bloc_tache_complet">
+            <div class="row bloc_tache_titre pt-2 pb-2">
+                <div class="col-12">
+                    <h2>Ma ToDoList</h2>
+                    <button>
+                        <a href="{{ path('app_tache_new') }}">Ajouter une Tâche</a>
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-4 d-flex justify-content-around">
+                <div id="done" class="col-4 bloc_taches "  ondragover="dragOver(event)" ondrop="drop(event)">
+                    <h3>A Faire</h3>
+                    <div id="tache" class="bloc_tache_faire d-flex flex-column align-items-center pt-2 pb-2">
+                        {% for tache in taches %}
+                            {% if tache.user == app.user and tache.tacheStatut == 'done'%}
+                                <div class="tache_complete d-flex justify-content-between align-items-center mt-3 mb-3" id='task' draggable="true" ondragstart="dragStart(event)">
+                                    <div class='description_tache d-flex flex-column'>
+                                        <h4>{{ tache.Titre }}</h4>
+                                        <p>{{ tache.description }}</p>
+                                        <p style="display:none" id="{{tache.id}}"></p>
+                                    </div>
+                                    <div class="boutons_tache d-flex">
+                                        <a href="{{ path('app_tache_edit', { id: tache.id }) }}"><img src="{{ asset('assets/img/modifier.png') }}" alt="modifier.png"></a>
+                                        <a href="{{ path('app_tache_delete', {'id': tache.id}) }}"><img src="{{ asset('assets/img/supprimer.png') }}" alt="supprimer.png"></a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-4 bloc_taches" id='doing' ondragover="dragOver(event)" ondrop="drop(event)">
+                    <h3>En cours</h3>
+                    <div class="bloc_tache_en_cours dropzone d-flex flex-column align-items-center pt-2 pb-2 ">
+                    {% for tache in taches %}
+                            {% if tache.user == app.user and tache.tacheStatut == 'doing'%}
+                                <div class="tache_complete d-flex justify-content-between align-items-center mt-3 mb-3" id='task' draggable="true" ondragstart="dragStart(event)">
+                                    <div class='description_tache d-flex flex-column'>
+                                        <h4>{{ tache.Titre }}</h4>
+                                        <p>{{ tache.description }}</p>
+                                        <p style="display:none" id="{{tache.id}}"></p>
+                                    </div>
+                                    <div class="boutons_tache d-flex">
+                                        <a href="{{ path('app_tache_edit', { id: tache.id }) }}"><img src="{{ asset('assets/img/modifier.png') }}" alt="modifier.png"></a>
+                                        <a href="{{ path('app_tache_delete', {'id': tache.id}) }}"><img src="{{ asset('assets/img/supprimer.png') }}" alt="supprimer.png"></a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     <section class="curved container-fluid d-flex justify-content-center align-items-center">
+        <img src="{{ asset('assets/img/osceale-logo.png') }}" alt="">
+    </section>
+    <div class="container mt-4 mb-4">
+        <div class="row">
+            <div class="col-12 d-flex flex-column align-items-center ">
+                <h1 class="mt4">OSCEALE - Blog</h1>
+                <p style='font-size:15px'>Article - {{article.titre}}</p>
+            </div>        
+        </div>
+    </div>
+
+    <div class="container w-100 bloc_show_article">
+        <div class="row ">
+            <div class="col-11 d-flex justify-content-between align-item-center">
+                <h3>{{article.titre}}</h3>
+                <p>{{article.createdAt ? article.createdAt|date('d-m-Y') : '' }}</p>
+            </div>
+            <div class="col-11 image_article justify-content-start mt-3">
+                <img src="{{ asset(vich_uploader_asset(article , 'imageFile')) }}" alt="">
+            </div>
+            <div class="col-11 mt-3">
+                {{article.contenu}}
+            </div>
+        </div>
+    </div>
+    <div class="container pb-4">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-end mt-4">
+                <button class='bouton_return_blog'>
+                    <a href="{{ path('article.index') }}">Revenir au blog</a>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

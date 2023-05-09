@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Osceale - Articles
+{% endblock %}
+
+{% block body %}
+	<section class="curved container-fluid d-flex justify-content-center align-items-center">
+		<img src="{{ asset('assets/img/osceale-logo.png') }}" alt="">
+	</section>
+	<div class="container mt-4 mb-4 ">
+		<div class="row">
+			<div class="col-12 d-flex flex-column align-items-center ">
+				<h1 class="mt4">Les Articles</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container mt-4">
+
+		{% if app.user %}
+			{% if 'ROLE_ADMIN' in app.user.roles %}
+
+				<a href="{{ path('article.new') }}" class='btn btn-primary'>
+					Créer un article
+				</a>
+			{% endif %}
+		{% endif %}
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+				<strong>Succès!</strong>
+				{{ message }}
+
+			</div>
+
+
+		{% endfor %}
+
+		<div class="count">
+			Il y a
+			{{ articles.getTotalItemCount }}
+			articles au total
+		</div>
+
+		<div class="container ">
+			<div class="row d-flex justify-content-center gap-4 row_article">
+				{% for article in articles %}
+
+					<div class="col-12 col-lg-3 article_index_bloc">
+						<div class="date_titre_article_index">
+							<h3>{{article.titre}}</h3>
+							<p>{{article.createdAt ? article.createdAt|date('d-m-Y') : '' }}</p>
+							<img src="{{ asset(vich_uploader_asset(article , 'imageFile')) }}" alt="">
+						</div>
+						<div class="description_article_index">
+							<p>{{article.description}}</p>
+						</div>
+						<div class="boutons_article_index d-flex flex-column align-items-end mb-3">
+							<button class='btn_show_index_article'>
+								<a href="{{ path('app_article_show', { id: article.id }) }}">Voir l'article</a>
+							</button>
+							{% if app.user %}
+								{% if 'ROLE_ADMIN' in app.user.roles %}
+									<button class='btn_edit_index_article'>
+										<a href="{{ path('article.edit', { id: article.id }) }}">Modifier</a>
+									</button>
+									<button class='btn_delete_index_article'>
+										<a href="{{ path('article.delete', { id: article.id }) }}">supprimer</a>
+									</button>
+								{% endif %}
+							{% endif %}
+						</div>
+					</div>
+
+				{% endfor %}
+			</div>
+		</div>
+		<div class="navigation mt-5 d-flex justify-content-center">
+			{{ knp_pagination_render(articles) }}
+		</div>
+	</div>
+{% endblock %}

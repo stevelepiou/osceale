@@ -1,0 +1,87 @@
+<div class="container-fluid img_logo d-flex justify-content-between align-items-center pt-2 pb-2">
+	{% if app.user %}
+		<p>Bonjour
+			{{ app.user.Prenom }}
+			{{ app.user.Nom }}</p>
+	{% else %}
+		<p>Vous naviguer en tant que visiteur.</p>
+	{% endif %}
+	<img src="{{ asset('assets/img/osceale-logo.png') }}" alt="">
+	{% if app.user %}
+		{% if 'ROLE_ADMIN' in app.user.roles %}
+			<div class="utilisateur_connecter d-flex gap-4">
+				<p>Vous êtes connecter en tant qu'administrateur.</p>
+				<a href="{{ path('security.logout') }}" target=''>se déconnecter</a>
+			</div>
+		{% else %}
+			<div class="utilisateur_connecter d-flex gap-4">
+				<p>Vous êtes connecter en tant qu'utilisateur.</p>
+				<a href="{{ path('security.logout') }}" target=''>se déconnecter</a>
+			</div>
+		{% endif %}
+	{% else %}
+		<div>
+			<a href="{{ path('app_security') }}">se connecter</a>
+			ou
+			<a href="{{ path('security.registration') }}">s'inscrire</a>
+		</div>
+	{% endif %}
+</div>
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top p-0 ">
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	{% if app.user %}
+		<div class="collapse navbar-collapse  flex-column " id="navbarNavAltMarkup">
+
+			<div class="navbar-nav d-flex justify-content-around w-100 nav_commun pt-3 pb-3">
+				<a class="nav-item nav-link active" href="{{ path('app_home') }}">
+					Accueil
+				</a>
+				<a class="nav-item nav-link" href="#">Notre Association</a>
+				<a class="nav-item nav-link" href="#">Thématiques</a>
+				<a class="nav-item nav-link" href="{{ path('article.index') }}">Blog</a>
+
+
+				<a class=" nav-item nav-link" href="{{ path('app_tache_index') }}">M'organiser</a>
+
+
+				<a class="nav-item nav-link" href="#">Nous Contacter</a>
+			</div>
+			{% if 'ROLE_ADMIN' in app.user.roles %}
+
+
+				<div class="navbar-nav d-flex justify-content-around align-items-center  nav_admin pt-1 pb-1">
+					<a class="nav-link " href="{{ path('article.new') }}">
+						Nouvel Article
+					</a>
+					<a class=" nav-item nav-link " href="http://osceale-projet-final.localhost/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController">
+						Les Utilisateurs
+					</a>
+				</div>
+			{% endif %}
+
+
+		</div>
+	{% else %}
+		<div class="collapse navbar-collapse  flex-column " id="navbarNavAltMarkup">
+
+			<div class="navbar-nav d-flex justify-content-around w-100 nav_commun pt-3 pb-3">
+				<a class="nav-item nav-link active" href="{{ path('app_home') }}">
+					Accueil
+				</a>
+				<a class="nav-item nav-link" href="#">Notre Association</a>
+				<a class="nav-item nav-link" href="#">Thématiques</a>
+				<a class="nav-item nav-link" href="{{ path('article.index') }}">Blog</a>
+				<a class="nav-item nav-link" href="#">Nous Contacter</a>
+			</div>
+
+
+		</div>
+	{% endif %}
+
+</nav>

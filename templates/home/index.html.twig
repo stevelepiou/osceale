@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<section class="curved container-fluid d-flex justify-content-center align-items-center">
+		<img src="{{ asset('assets/img/osceale-logo.png') }}" alt="">
+	</section>
+	<section class="block_visuel">
+		<div class="container pt-4 pb-4 ">
+			<div class="row">
+				<div class="col-12 d-flex flex-column align-items-center ">
+					<h1 class="mt4">Bienvenue sur le site de Osceale</h1>
+					<p style='font-size:15px'>Organisation SocioCulturelle Educative et d'Accompagnement vers l'Emploi</p>
+				</div>
+			</div>
+		</div>
+		{# <section class="container mt-4 ">
+					<div class="row d-flex justify-content-center double_bloc_bleu">
+						<div class="col-12 col-lg-5 col-md-10  bloc_bleu_accueil">
+							<h3>Lorem ipsum dolor sit
+							</h3>
+							<div class="bloc_inter_bleu_accueil mt-4">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis at, dolorum eaque id repudiandae minima, harum sunt ipsum accusamus fuga est quas rem quisquam? Molestiae voluptas autem vitae accusamus quasi.
+																											                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi sapiente tempore ad aut. Corrupti deserunt tempora dolorem. Veritatis eius, reprehenderit similique odio dolores voluptatibus laudantium! Molestiae commodi odio eos facere.
+																											                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error delectus dignissimos illo laboriosam omnis perferendis amet fuga fugiat excepturi animi, ab ipsum! Minus tempora, illum ducimus natus sunt temporibus repellendus!
+																											                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis provident aliquam qui officiis cupiditate quia, laboriosam voluptatibus dicta laborum dignissimos saepe atque corporis est veritatis, accusamus assumenda aperiam! Distinctio, optio.
+																											                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum, exercitationem iusto! Mollitia aliquam, recusandae earum quod accusantium facere placeat officia. Vitae aliquid in accusantium unde voluptatem ullam laudantium animi fuga!
+		
+								</p>
+							</div>
+						</div>
+						<div class="col-12 col-lg-6 col-md-10 bloc_fonctionnel_accueil d-flex flex-column align-items-center justify-content-center gap-5 mt-5">
+							<img src="{{ asset('assets/img/osceale-logo.png') }}" alt="osceale-logo">
+							<h3>Notre site est fonctionnel<br>et ouvert à tous !</h3>
+						</div>
+					</div>
+				</section> #}
+
+		<section class="container mt-4 pb-4 ">
+			<div class="row d-flex justify-content-center">
+				<div class="col-12 col-lg-7  col-md-10 accueil_gauche">
+					<h2>Edito</h2>
+					<hr>
+					<div>
+						<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque commodi labore veritatis, sit voluptate nisi quam, sint debitis blanditiis neque eos laudantium vel alias necessitatibus fugiat repellat provident aut maxime.
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque commodi labore veritatis, sit voluptate nisi quam, sint debitis blanditiis neque eos laudantium vel alias necessitatibus fugiat repellat provident aut maxime.
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque commodi labore veritatis, sit voluptate nisi quam, sint debitis blanditiis neque eos laudantium vel alias necessitatibus fugiat repellat provident aut maxime.
+						</p>
+					</div>
+				</div>
+				<div class="col-12 col-lg-3 col-md-10 accueil_droite d-flex flex-column">
+					{% for article in articles %}
+						<div class='article_menu '>
+							<div class="titre_date_article d-flex flex-column align-items-start  ">
+								<h4>{{ article.titre }}</h4>
+								<div>{{ article.createdAt|date("d/m/Y")  }}</div>
+							</div>
+							<div class='image_article_accueil d-flex justify-content-end pt-2 pe-2'>
+								<img src="{{ asset(vich_uploader_asset(article , 'imageFile')) }}" alt="">
+							</div>
+
+
+							<div class="bouton_article_accueil w-100 d-flex justify-content-end mt-2 mb-2">
+								<button class='btn bout_show_article_accueil'>
+									<a href="{{ path('app_article_show', { id: article.id }) }}">Voir l'article</a>
+								</button>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+
+		<section class="container  mt-5 pb-5">
+			<div class="row">
+				<div class="col-12 bloc_domaine_accueil">
+					<h2>Nos domaines d'intervention</h2>
+					<hr>
+					<div class="bloc_interventions d-flex justify-content-between mt-3">
+						<button>
+							<a href="">
+								<img src="{{ asset('assets/img/osceale-famille.png') }}" alt="osceale-famille">
+								<h6>Education<br>Parentalité</h6>
+							</a>
+						</button>
+						<button>
+							<a href="">
+								<img src="{{ asset('assets/img/osceale-famille.png') }}" alt="osceale-famille">
+								<h6>Lien social<br>Mixité</h6>
+							</a>
+						</button>
+						<button>
+							<a href="">
+								<img src="{{ asset('assets/img/osceale-famille.png') }}" alt="osceale-famille">
+								<h6>Prévention<br>santé</h6>
+							</a>
+						</button>
+						<button>
+							<a href="">
+								<img src="{{ asset('assets/img/osceale-famille.png') }}" alt="osceale-famille">
+								<h6>Culture<br>Loisirs</h6>
+							</a>
+						</button>
+						<button>
+							<a href="">
+								<img src="{{ asset('assets/img/osceale-famille.png') }}" alt="osceale-famille">
+								<h6>Citoyenneté<br>Eco-citoyenneté</h6>
+							</a>
+						</button>
+						<button>
+							<a href="">
+								<img src="{{ asset('assets/img/osceale-famille.png') }}" alt="osceale-famille">
+								<h6>Accès droits<br>insertion</h6>
+							</a>
+						</button>
+						
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		
+	</section>
+
+{% endblock %}
