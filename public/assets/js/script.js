@@ -5,10 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let draggedTask = null;
   let tacheId;
-console.log(tasks);
-  function dragStart() {
+
+  function dragStart(e) {
     draggedTask = this;
-    tacheId = task.firstElementChild.lastElementChild.id;
+    tacheId = e.target.childNodes[1].childNodes[5].id
+    console.log(tacheId);
   }
 
   // Ajouter un événement pour le glisser
